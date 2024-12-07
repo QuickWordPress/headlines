@@ -159,10 +159,18 @@ function addInputField(value = '', index) {
     }
 }
 
-// Initially add 15 input fields
+// Initially add input fields if no data is stored in localStorage
 document.addEventListener('DOMContentLoaded', () => {
-    for (let i = 1; i <= 15; i++) {
-        addInputField('', i);
+    const inputsData = JSON.parse(localStorage.getItem('inputsData'));
+    
+    if (!inputsData || inputsData.length === 0) {
+        // If no data is stored, add 15 input fields initially
+        for (let i = 1; i <= 15; i++) {
+            addInputField('', i);
+        }
+    } else {
+        // If data exists, just load the saved inputs
+        loadInputs();
     }
 });
 
@@ -197,7 +205,8 @@ tabButtons.forEach(button => {
 
 // Initial load
 loadInputs();
-
 </script>
+
+
 </body>
 </html>
